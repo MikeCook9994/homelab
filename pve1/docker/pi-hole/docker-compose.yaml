@@ -15,5 +15,4 @@ services:
       - "/root/pihole/etc:/etc/pihole"
       - "/root/pihole/etc/dnsmasq.d:/etc/dnsmasq.d"
     restart: unless-stopped
-    networks:
-      - bridge
+    network_mode: bridge
