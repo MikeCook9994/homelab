@@ -7,7 +7,7 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-      - "8008:80/tcp"
+      - "80:80/tcp"
     environment:
       TZ: "America/Los_Angeles"
       WEBPASSWORD: ${WEBPASSWORD:?Provide Web Password as an Environment Variable}
@@ -15,3 +15,5 @@ services:
       - "/root/pihole/etc:/etc/pihole"
       - "/root/pihole/etc/dnsmasq.d:/etc/dnsmasq.d"
     restart: unless-stopped
+    networks:
+      - bridge
