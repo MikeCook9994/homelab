@@ -11,10 +11,11 @@ services:
     environment:
       TZ: "America/Los_Angeles"
       WEBPASSWORD: ${WEBPASSWORD:?Provide Web Password as an Environment Variable}
+      DNSMASQ_LISTENING: all
     volumes:
       - "/root/pihole/etc:/etc/pihole"
       - "/root/pihole/etc/dnsmasq.d:/etc/dnsmasq.d"
     restart: unless-stopped
     cap_add:
-      - "NET_ADMIN "
+      - "NET_ADMIN"
     network_mode: bridge
