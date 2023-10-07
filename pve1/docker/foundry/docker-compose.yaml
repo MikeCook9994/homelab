@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  foundry_vtt:
+    container_name: 'foundryvtt'
+    image: 'felddy/foundryvtt:release'
+    restart: 'unless-stopped'
+    ports:
+      - '30000:30000/tcp'
+    environment:
+      CONTAINER_PRESERVE_CONFIG: true
+      FOUNDRY_HOSTNAME: 'foundryvtt.michaelcook.dev'
+      FOUNDRY_LOCAL_HOSTNAME: 'foundry.local.michaelcook.dev'
+      FOUNDRY_MINIFY_STATIC_FILES: true
+      FOUNDRY_TELEMETRY: true
+      FOUNDRY_VERSION: '11.313'
+    volumes:
+      - '/root/foundryvtt/data:/data'
+    secrets:
+      - source: 'config'
+        target: 'config.json'
+secrets:
+  config:
+    file: 'secrets.json'  

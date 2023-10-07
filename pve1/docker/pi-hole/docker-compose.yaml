@@ -1,19 +1,19 @@
-version: "3"
+version: '3'
 
 services:
   pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
+    container_name: 'pihole'
+    image: 'pihole/pihole:latest'
+    restart: 'unless-stopped'
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "8001:80/tcp"
+      - '53:53/tcp'
+      - '53:53/udp'
+      - '8001:80/tcp'
     environment:
-      TZ: "America/Los_Angeles"
-      WEBPASSWORD: ${WEBPASSWORD:?Provide Web Password as an Environment Variable}
-      DNSMASQ_LISTENING: all
+      TZ: 'America/Los_Angeles'
+      WEBPASSWORD: '${WEBPASSWORD:?Provide Web Password as an Environment Variable}'
+      DNSMASQ_LISTENING: 'all'
     volumes:
-      - "/root/pihole/etc:/etc/pihole"
-      - "/root/pihole/etc/dnsmasq.d:/etc/dnsmasq.d"
-    restart: unless-stopped
-    network_mode: bridge
+      - '/root/pihole/etc:/etc/pihole'
+      - '/root/pihole/etc/dnsmasq.d:/etc/dnsmasq.d'
+    network_mode: 'bridge'
