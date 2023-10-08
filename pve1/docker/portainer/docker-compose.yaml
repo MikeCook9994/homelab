@@ -1,6 +1,6 @@
 services:
   portainer:
-    container_name: portainer
+    container_name: 'portainer'
     image: 'portainer/portainer-ce:latest'
     restart: 'always'
     command: 
