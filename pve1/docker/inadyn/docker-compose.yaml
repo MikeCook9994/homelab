@@ -1,0 +1,7 @@
+services:
+  inadyn:
+    container_name: 'inadyn'
+    image: 'troglobit/inadyn:latest'
+    restart: 'always'
+    volumes:
+      - './inadyn.conf:/etc/inadyn.conf'

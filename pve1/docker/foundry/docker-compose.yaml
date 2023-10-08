@@ -12,6 +12,7 @@ services:
       FOUNDRY_TELEMETRY: true
       FOUNDRY_VERSION: '11.313'
       FOUNDRY_PROXY_SSL: true
+      FOUNDRY_PROXY_PORT: 443
     volumes:
       - '/root/foundryvtt/data:/data'
     secrets:
@@ -21,4 +22,4 @@ services:
 
 secrets:
   config:
-    file: 'secrets.json'  
+    file: 'secrets.json'

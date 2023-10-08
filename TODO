@@ -1,8 +1,12 @@
 [] Understand networking
 [] Get containers (host and docker) off root user
+[] Setup SSH keys
 [] Finish configuring ssl
 [] Optimize SSH and internal routing
 [] Optimize external routing
 [] Move nginx proxy manager to standalone container
 [] Setup authentik
 [] Move pihole to raspberry pi (after moving)
+[] DNS-over-https
+[] Configure PFSense
+[] Use router in AP only mode
