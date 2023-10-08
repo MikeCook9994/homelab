@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   foundry_vtt:
     container_name: 'foundryvtt'
@@ -19,6 +17,8 @@ services:
     secrets:
       - source: 'config'
         target: 'config.json'
+    network_mode: 'bridge'
+
 secrets:
   config:
     file: 'secrets.json'  

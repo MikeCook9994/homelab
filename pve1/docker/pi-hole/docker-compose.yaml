@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   pihole:
     container_name: 'pihole'
@@ -11,9 +9,15 @@ services:
       - '8001:80/tcp'
     environment:
       TZ: 'America/Los_Angeles'
-      WEBPASSWORD: '${WEBPASSWORD:?Provide Web Password as an Environment Variable}'
+      WEBPASSWORD_FILE: '/run/secrets/password'
       DNSMASQ_LISTENING: 'all'
     volumes:
       - '/root/pihole/etc:/etc/pihole'
       - '/root/pihole/etc/dnsmasq.d:/etc/dnsmasq.d'
+    secrets:
+      - 'password'
     network_mode: 'bridge'
+
+secrets:
+  password:
+    file: 'secrets.txt'

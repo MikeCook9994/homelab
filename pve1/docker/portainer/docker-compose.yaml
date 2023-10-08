@@ -1,15 +1,22 @@
-version: '3'
 services:
   portainer:
     image: 'portainer/portainer-ce:latest'
     restart: 'always'
-    command: '-H unix:///var/run/docker.sock'
+    command: 
+      - '-H unix:///var/run/docker.sock'
+      - '--admin-password-file=/run/secrets/password'
     ports:
-      - '8000:8000/tcp'
       - '9443:9443/tcp'
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - 'portainer_data:/data'
+    secrets:
+      - 'password'
     network_mode: 'bridge'
+
+secrets:
+  password:
+    file: 'secrets.txt'
+
 volumes:
   portainer_data:
