@@ -1,0 +1,8 @@
+[] Understand networking
+[] Get containers (host and docker) off root user
+[] Finish configuring ssl
+[] Optimize SSH and internal routing
+[] Optimize external routing
+[] Move nginx proxy manager to standalone container
+[] Setup authentik
+[] Move pihole to raspberry pi (after moving)
