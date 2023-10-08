@@ -20,4 +20,4 @@ services:
 
 secrets:
   password:
-    file: 'secrets.txt'
+    file: 'password.txt'
