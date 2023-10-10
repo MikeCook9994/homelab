@@ -15,16 +15,13 @@ fi
 baseUrl="https://api.cloudflare.com"
 contentType="Content-Type: application/json"
 
-BASEDIR=$(dirname "$0")
-apiKey=$(cat "$BASEDIR/apikey.txt")
-bearerAuthHeader="Authorization: Bearer $apiKey"
+$API_KEY=$(cat $API_KEY_FILE)
+bearerAuthHeader="Authorization: Bearer $API_KEY"
 
-hostname="local"
-zone="michaelcook.dev"
-url="$hostname.$zone"
+url="$HOSTNAME.$ZONE"
 
 # Get DNS Zones
-zoneId=$(curl -s --request GET --url "$baseUrl/client/v4/zones?name=$zone" -H "$contentType" -H "$bearerAuthHeader" | jq -r --arg zone "$zone" '.result[] | select(.name==$zone) | .id' | cat)
+zoneId=$(curl -s --request GET --url "$baseUrl/client/v4/zones?name=$ZONE" -H "$contentType" -H "$bearerAuthHeader" | jq -r --arg ZONE "$ZONE" '.result[] | select(.name==$ZONE) | .id' | cat)
 
 if [[ -z $zoneId ]]
 then

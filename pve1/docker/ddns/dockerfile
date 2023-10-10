@@ -1,0 +1,12 @@
+FROM alpine:3.18.4
+
+COPY ./ddns.sh /user/bin
+RUN chmod +X /user/bin
+
+RUN apk add --no-cache curl jq cron busybox-openrc
+
+RUN echo '/5 * * * * ddns' > ddns-crontab
+COPY ddns-crontab /etc/cron.d
+RUN chmod 0644 /etc/cron.d/ddns-crontab
+
+ENTRYPOINT ["cron", "-f"]

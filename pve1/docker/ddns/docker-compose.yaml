@@ -1,7 +1,13 @@
 services:
-  inadyn:
-    container_name: 'inadyn'
-    image: 'troglobit/inadyn:latest'
-    restart: 'always'
-    volumes:
-      - './inadyn.conf:/etc/inadyn.conf'
+  ddns:
+    container_name: 'ddns'
+    build: '.'
+    restart: 'unless-stopped'
+    environment:
+      HOSTNAME: 'local'
+      ZONE: 'michaelcook.dev'
+      API_KEY_FILE: '/run/secrets/apikey'
+
+secrets:
+  apikey:
+    file: 'apikey.txt'
