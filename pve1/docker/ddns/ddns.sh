@@ -50,4 +50,5 @@ requestBody='{
 # Create or Update DNS Record
 result=$(curl -s --request "$requestMethod" --url "$requestUrl" -H "$contentType" -H "$bearerAuthHeader" -d "$requestBody" | jq -r '.success')
 
+echo "$result"
 exit $([ "$result" == "true" ] && echo 0 || echo 1)
