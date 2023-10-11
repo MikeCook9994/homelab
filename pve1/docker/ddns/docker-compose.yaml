@@ -4,9 +4,11 @@ services:
     build: '.'
     restart: 'unless-stopped'
     environment:
-      HOSTNAME: 'local'
+      SUBZONE: 'local'
       ZONE: 'michaelcook.dev'
       API_KEY_FILE: '/run/secrets/apikey'
+    secrets:
+      - 'apikey'
 
 secrets:
   apikey:

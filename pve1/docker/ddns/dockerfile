@@ -1,12 +1,12 @@
 FROM alpine:3.18.4
 
-COPY ./ddns.sh /user/bin
-RUN chmod +X /user/bin
+COPY ./ddns.sh /usr/bin
+RUN chmod +x /usr/bin/ddns.sh
 
 RUN apk add --no-cache curl jq busybox-openrc
 
 # TODO: run as a user other than root
 # https://medium.com/@geekidea_81313/running-cron-jobs-as-non-root-on-alpine-linux-e5fa94827c34
-RUN echo '5 * * * * ddns' >> /var/spool/cron/crontabs/root
+RUN echo '5 * * * * ddns.sh' >> /var/spool/cron/crontabs/root
 
 ENTRYPOINT ["crond", "-f"]

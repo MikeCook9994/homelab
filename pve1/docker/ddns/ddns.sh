@@ -3,6 +3,8 @@
 # Get IP addr
 ip4=$(curl -s -4 icanhazip.com)
 
+echo "$ip4"
+
 # Regular expression for IPv4
 regex="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"
 
@@ -18,19 +20,25 @@ contentType="Content-Type: application/json"
 $API_KEY=$(cat $API_KEY_FILE)
 bearerAuthHeader="Authorization: Bearer $API_KEY"
 
-url="$HOSTNAME.$ZONE"
+url="$HOSTNAME.$SUBZONE"
+
+echo "$url"
 
 # Get DNS Zones
-zoneId=$(curl -s --request GET --url "$baseUrl/client/v4/zones?name=$ZONE" -H "$contentType" -H "$bearerAuthHeader" | jq -r --arg ZONE "$ZONE" '.result[] | select(.name==$ZONE) | .id' | cat)
+zoneId=$(curl -s --request GET --url "$baseUrl/client/v4/zones?name=$SUBZONE" -H "$contentType" -H "$bearerAuthHeader" | jq -r --arg SUBZONE "$SUBZONE" '.result[] | select(.name==$SUBZONE) | .id' | cat)
 
-if [[ -z $zoneId ]]
+echo "$SUBZONEId"
+
+if [[ -z $SUBZONEId ]]
 then
     echo "Could not resolve a zone id"
     exit 1
 fi
 
 # Get DNS Records
-recordId=$(curl -s --request GET --url "$baseUrl/client/v4/zones/$zoneId/dns_records?type=A&name=$url" -H "$contentType" -H "$bearerAuthHeader" | jq -r --arg url "$url" '.result[] | select(.name=$url) | .id' | cat)
+recordId=$(curl -s --request GET --url "$baseUrl/client/v4/zones/$SUBZONEId/dns_records?type=A&name=$url" -H "$contentType" -H "$bearerAuthHeader" | jq -r --arg url "$url" '.result[] | select(.name=$url) | .id' | cat)
+
+echo "$recordId"
 
 if [[ -z $recordId ]]
 then
@@ -38,7 +46,7 @@ then
 fi
 
 requestMethod=$([ -z "$recordId" ] && echo "POST" || echo "PUT")
-requestUrl="$baseUrl/client/v4/zones/$zoneId/dns_records$([ -z "$recordId" ] && echo "" || echo "/$recordId")"
+requestUrl="$baseUrl/client/v4/zones/$SUBZONEId/dns_records$([ -z "$recordId" ] && echo "" || echo "/$recordId")"
 requestBody='{
     "content": "'"$ip4"'",
     "name": "'"$url"'",
