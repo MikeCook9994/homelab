@@ -2,6 +2,8 @@ services:
   ddns:
     container_name: 'ddns'
     build: '.'
+    init: true
+    image: 'draenal/ddns'
     restart: 'unless-stopped'
     environment:
       SUBZONE: 'local'
