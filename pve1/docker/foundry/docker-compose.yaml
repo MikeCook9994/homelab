@@ -19,7 +19,13 @@ services:
       - source: 'config'
         target: 'config.json'
     network_mode: 'bridge'
-
+  ddb_importer:
+    container_name: 'ddb-importer'
+    image: ghcr.io/mrprimate/ddb-proxy:latest
+    restart: 'unless-stopped'
+    ports:
+      - '30001:3000/tcp'
+    network_mode: 'bridge'
 secrets:
   config:
     file: 'secrets.json'
