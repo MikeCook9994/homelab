@@ -4,13 +4,13 @@ services:
     build: '.'
     init: true
     image: 'draenal/ddns'
-    restart: 'unless-stopped'
     environment:
       SUBZONE: 'local'
       ZONE: 'michaelcook.dev'
       API_KEY_FILE: '/run/secrets/apikey'
     secrets:
       - 'apikey'
+    restart: 'unless-stopped'
 
 secrets:
   apikey:

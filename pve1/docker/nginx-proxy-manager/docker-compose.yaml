@@ -2,7 +2,6 @@ services:
   nginxpm:
     container_name: 'nginxpm'
     image: 'jc21/nginx-proxy-manager:latest'
-    restart: 'unless-stopped'
     ports:
       - '80:80/tcp'
       - '81:81/tcp'
@@ -11,3 +10,4 @@ services:
       - '/root/nginxpm/data:/data'
       - '/root/nginxpm/letsencrypt:/etc/letsencrypt'
     network_mode: 'bridge'
+    restart: 'unless-stopped'
