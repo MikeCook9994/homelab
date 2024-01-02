@@ -1,6 +1,6 @@
 [x] Understand networking
 [] Get containers (host and docker) off root user
-[] Setup SSH keys
+[x] Setup SSH keys
 [] Finish configuring ssl
 [] Optimize SSH and internal routing
 [] Optimize external routing

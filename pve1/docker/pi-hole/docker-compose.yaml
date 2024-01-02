@@ -19,6 +19,8 @@ services:
     # todo: connect to local network
     # https://github.com/sarunas-zilinskas/docker-compose-macvlan
     network_mode: 'bridge'
+    cap_add:
+      - 'NET_ADMIN'
 
 secrets:
   password:
