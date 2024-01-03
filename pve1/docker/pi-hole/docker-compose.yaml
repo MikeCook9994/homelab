@@ -3,8 +3,6 @@ services:
     container_name: 'pihole'
     image: 'pihole/pihole:latest'
     hostname: 'ph1'
-    domainname: 'local.michaelcook.dev'
-    mac_address: 'C1:53:40:11:EC:39'
     volumes:
       - '/root/pihole/etc:/etc/pihole'
       - '/root/pihole/etc/dnsmasq.d:/etc/dnsmasq.d'
@@ -12,14 +10,17 @@ services:
       TZ: 'America/Los_Angeles'
       WEBPASSWORD_FILE: '/run/secrets/password'
       DNSMASQ_LISTENING: 'local'
-      PIHOLE_DNS_: '1.1.1.1;1.0.0.1'
-      DHCP_ACTIVE: 'true'
+      PIHOLE_DNS_: '1.1.1.1;1.0.0.1;2606:4700:4700::1111;2606:4700:4700::1001'
+      DHCP_ACTIVE: true
       DHCP_START: '192.168.1.2'
       DHCP_END: '192.168.1.254'
       DHCP_ROUTER: '192.168.1.1'
+      FTLCONF_LOCAL_IPV4: '192.168.1.57'
       PIHOLE_DOMAIN: 'ph1'
-      VIRTUAL_HOME: 'ph1.local.michaelcook.dev'
-      DHCP_IPv6: 'true'
+      VIRTUAL_HOST: 'local.michaelcook.dev'
+      DHCP_IPv6: true
+    cap_add:
+      - 'NET_ADMIN'
     networks:
       pihole_macvlan:
         ipv4_address: '192.168.1.57'
@@ -36,7 +37,7 @@ networks:
     name: 'pihole_macvlan'
     driver: 'macvlan'
     driver_opts:
-      parent: 'vmbr0'
+      parent: 'eth0'
     ipam:
       config:
         - subnet: '192.168.1.0/24'
