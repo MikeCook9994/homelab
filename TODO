@@ -1,9 +1,6 @@
-[x] Understand networking
-[] Get containers (host and docker) off root user
-[] Setup SSH keys
-[] Finish configuring ssl
-[] Optimize SSH and internal routing
-[] Optimize external routing
+[] Refresh SSL certificates
+[] Setup primary DNS server on baremetal raspberry pi
+[] Optimize internal DNS to get away from port numbers
 [] Move nginx proxy manager to standalone container
 [] Setup authentik
 [] Move pihole to raspberry pi (after moving)
