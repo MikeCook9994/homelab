@@ -16,14 +16,14 @@ services:
       DHCP_END: '192.168.1.254'
       DHCP_ROUTER: '192.168.1.1'
       FTLCONF_LOCAL_IPV4: '192.168.1.57'
-      PIHOLE_DOMAIN: 'ph1'
-      VIRTUAL_HOST: 'local.michaelcook.dev'
+      PIHOLE_DOMAIN: 'local'
       DHCP_IPv6: true
     cap_add:
       - 'NET_ADMIN'
     networks:
       pihole_macvlan:
         ipv4_address: '192.168.1.57'
+      pihole_bridge: {}
     secrets:
       - 'password'
     restart: 'unless-stopped'
@@ -33,12 +33,15 @@ secrets:
     file: 'password.txt'
 
 networks:
+  pihole_bridge:
+    name: 'pihole_bridge'
+    driver: 'bridge'
   pihole_macvlan:
     name: 'pihole_macvlan'
     driver: 'macvlan'
     driver_opts:
-      parent: 'eth0'
+      parent: 'mvlan0'
     ipam:
       config:
         - subnet: '192.168.1.0/24'
-          gateway: '192.168.1.1'
+          gateway: '192.168.1.254'

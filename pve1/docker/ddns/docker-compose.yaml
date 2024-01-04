@@ -10,6 +10,7 @@ services:
       API_KEY_FILE: '/run/secrets/apikey'
     secrets:
       - 'apikey'
+    network_mode: 'bridge'
     restart: 'unless-stopped'
 
 secrets:
