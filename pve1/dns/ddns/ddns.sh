@@ -32,7 +32,13 @@ then
     exit 1
 fi
 
-url="$SUBZONE.$ZONE"
+url="$ZONE"
+
+if [[ -z $SUBZONE ]]
+then
+    url="$SUBZONE.$ZONE"
+fi
+
 echo "Fetching DNS Record information for $url"
 
 # Get DNS Records

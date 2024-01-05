@@ -1,4 +1,8 @@
-[] get off nginx proxy manager
+[] configure LXC turnkey docker template
+[] deploy traefik
+[] setup portainer agents (or api)
+[] configure traefik
+[] update ddns to not use subzone
 [] Figure our why macvlan cannot access internet
 [] Create macvlan on boot
 [] Setup primary DNS server on baremetal raspberry pi
