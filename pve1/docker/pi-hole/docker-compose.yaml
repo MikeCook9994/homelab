@@ -2,26 +2,46 @@ services:
   pihole:
     container_name: 'pihole'
     image: 'pihole/pihole:latest'
-    restart: 'unless-stopped'
-    ports:
-      - '53:53/tcp'
-      - '53:53/udp'
-      - '8001:80/tcp'
-    environment:
-      TZ: 'America/Los_Angeles'
-      WEBPASSWORD_FILE: '/run/secrets/password'
-      DNSMASQ_LISTENING: 'all'
+    hostname: 'ph1'
     volumes:
       - '/root/pihole/etc:/etc/pihole'
       - '/root/pihole/etc/dnsmasq.d:/etc/dnsmasq.d'
-    secrets:
-      - 'password'
-    # todo: connect to local network
-    # https://github.com/sarunas-zilinskas/docker-compose-macvlan
-    network_mode: 'bridge'
+    environment:
+      TZ: 'America/Los_Angeles'
+      WEBPASSWORD_FILE: '/run/secrets/password'
+      DNSMASQ_LISTENING: 'local'
+      PIHOLE_DNS_: '1.1.1.1;1.0.0.1;2606:4700:4700::1111;2606:4700:4700::1001'
+      DHCP_ACTIVE: true
+      DHCP_START: '192.168.1.2'
+      DHCP_END: '192.168.1.254'
+      DHCP_ROUTER: '192.168.1.1'
+      FTLCONF_LOCAL_IPV4: '192.168.1.57'
+      PIHOLE_DOMAIN: 'local.michaelcook.dev'
+      DHCP_IPv6: true
     cap_add:
       - 'NET_ADMIN'
+    networks:
+      pihole_macvlan:
+        ipv4_address: '192.168.1.57'
+      pihole_bridge: {}
+    secrets:
+      - 'password'
+    restart: 'unless-stopped'
 
 secrets:
   password:
     file: 'password.txt'
+
+networks:
+  pihole_bridge:
+    name: 'pihole_bridge'
+    driver: 'bridge'
+  pihole_macvlan:
+    name: 'pihole_macvlan'
+    driver: 'macvlan'
+    driver_opts:
+      parent: 'mvlan0'
+    ipam:
+      config:
+        - subnet: '192.168.1.0/24'
+          gateway: '192.168.1.254'
