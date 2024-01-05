@@ -1,9 +1,5 @@
-[] Refresh SSL certificates
+[] get off nginx proxy manager
+[] Figure our why macvlan cannot access internet
+[] Create macvlan on boot
 [] Setup primary DNS server on baremetal raspberry pi
-[] Optimize internal DNS to get away from port numbers
-[] Move nginx proxy manager to standalone container
 [] Setup authentik
-[] Move pihole to raspberry pi (after moving)
-[] DNS-over-https
-[] Configure PFSense
-[] Use router in AP only mode
