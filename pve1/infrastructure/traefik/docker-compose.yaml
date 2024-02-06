@@ -23,8 +23,8 @@ services:
       - '/home/mike/homelab/pve1/infrastructure/traefik/acme.json:/acme.json:ro'
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routes.traefik.entrypoints=http'
-      - 'traefik.http.routes.traefik.rule=Host(`traefik.local.michaelcook.dev`)'
+      - 'traefik.http.routers.traefik.entrypoints=http'
+      - 'traefik.http.routers.traefik.rule=Host(`traefik.local.michaelcook.dev`)'
       - 'traefik.http.middlewares.traefik-auth.basicauth.users=BASIC_AUTH_PASSWORD'
       - 'traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https'
       - 'traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https'
