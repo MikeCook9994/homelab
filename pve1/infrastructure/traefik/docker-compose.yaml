@@ -11,6 +11,7 @@ services:
     environment:
       CF_API_EMAIL: 'mcook4728@gmail.com'
       CF_API_KEY_FILE: '/run/secrets/apikey'
+      BASIC_AUTH_PASSWORD: 'iguessthisgoeshere?'
     secrets:
       - 'apikey'
     volumes:
