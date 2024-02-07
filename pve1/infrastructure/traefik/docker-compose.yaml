@@ -25,7 +25,7 @@ services:
       - 'traefik.enable=true'
       - 'traefik.http.routers.traefik.entrypoints=http'
       - 'traefik.http.routers.traefik.rule=Host(`traefik.local.michaelcook.dev`)'
-      - 'traefik.http.middlewares.traefik-auth.basicauth.users=BASIC_AUTH_PASSWORD'
+      - 'traefik.http.middlewares.traefik-auth.basicauth.users=mike:BASIC_AUTH_PASSWORD'
       - 'traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https'
       - 'traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https'
       - 'traefik.http.routers.traefik.middlewares=traefik-https-redirect'
@@ -36,8 +36,6 @@ services:
       - 'traefik.http.routers.traefik-secure.tls.certresolver=cloudflare'
       - 'traefik.http.routers.traefik-secure.tls.domains[0].main=local.michaelcook.dev'
       - 'traefik.http.routers.traefik-secure.tls.domains[0].sans=*.local.michaeldook.dev'
-      - 'traefik.http.routers.traefik-secure.tls.domains[1].main=michaelcook.dev'
-      - 'traefik.http.routers.traefik-secure.tls.domains[1].sans=*.michaeldook.dev'
       - 'traefik.http.routers.traefik-secure.service=api@internal'
     network_mode: 'bridge'
 

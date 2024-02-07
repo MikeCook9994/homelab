@@ -3,9 +3,10 @@ FROM alpine:3.18.4
 RUN apk add --no-cache curl jq busybox-openrc
 
 COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod 744 /entrypoint.sh
 
 COPY ./ddns.sh /ddns.sh
-RUN chmod 0744 /ddns.sh
+RUN chmod 744 /ddns.sh
 
 RUN which crond
 RUN rm -rf /etc/periodic
