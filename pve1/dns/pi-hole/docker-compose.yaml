@@ -20,10 +20,7 @@ services:
       DHCP_IPv6: true
     cap_add:
       - 'NET_ADMIN'
-    networks:
-      pihole_macvlan:
-        ipv4_address: '192.168.1.57'
-      pihole_bridge: {}
+    network_mode: 'host'
     secrets:
       - 'password'
     restart: 'unless-stopped'
@@ -31,17 +28,3 @@ services:
 secrets:
   password:
     file: 'password.txt'
-
-networks:
-  pihole_bridge:
-    name: 'pihole_bridge'
-    driver: 'bridge'
-  pihole_macvlan:
-    name: 'pihole_macvlan'
-    driver: 'macvlan'
-    driver_opts:
-      parent: 'mvlan0'
-    ipam:
-      config:
-        - subnet: '192.168.1.0/24'
-          gateway: '192.168.1.254'
