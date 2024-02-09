@@ -35,8 +35,13 @@ services:
       - 'traefik.http.routers.traefik-secure.tls.domains[0].main=local.michaelcook.dev'
       - 'traefik.http.routers.traefik-secure.tls.domains[0].sans=*.local.michaeldook.dev'
       - 'traefik.http.routers.traefik-secure.service=api@internal'
-    network_mode: 'bridge'
+    networks:
+      - 'proxy'
 
 secrets:
   dnsapitoken:
     file: 'dnsapitoken.txt'
+
+networks:
+  proxy:
+    external: true
