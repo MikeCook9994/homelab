@@ -21,14 +21,16 @@ services:
       - '/home/mike/homelab/pve1/infrastructure/traefik/acme.json:/acme.json'
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.traefik.entrypoints=http'
-      - 'traefik.http.routers.traefik.rule=Host(`traefik.local.michaelcook.dev`)'
-      - 'traefik.http.middlewares.traefik-auth.basicauth.users=mike:BASIC_AUTH_PASSWORD'
+      - 'traefik.http.middlewares.traefik-auth.basicauth.users=mike:$$apr1$26u9afvb$$M.WjHBpcVYSfvBnR2cmtg.'
       - 'traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https'
       - 'traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https'
+      # traefik dashboard
+      - 'traefik.http.routers.traefik.rule=Host(`traefik.local.michaelcook.dev`)'
+      - 'traefik.http.routers.traefik.entrypoints=http'
       - 'traefik.http.routers.traefik.middlewares=traefik-https-redirect'
-      - 'traefik.http.routers.traefik-secure.entrypoints=https'
+      # traefik dashboard SSL
       - 'traefik.http.routers.traefik-secure.rule=Host(`traefik.local.michaelcook.dev`)'
+      - 'traefik.http.routers.traefik-secure.entrypoints=https'
       - 'traefik.http.routers.traefik-secure.middlewares=traefik-auth'
       - 'traefik.http.routers.traefik-secure.tls=true'
       - 'traefik.http.routers.traefik-secure.tls.certresolver=cloudflare'
@@ -37,13 +39,8 @@ services:
       - 'traefik.http.routers.traefik-secure.tls.domains[1].main=michaelcook.dev'
       - 'traefik.http.routers.traefik-secure.tls.domains[1].sans=*.michaelcook.dev'
       - 'traefik.http.routers.traefik-secure.service=api@internal'
-    networks:
-      - 'proxy'
+    network_mode: 'bridge'
 
 secrets:
   dnsapitoken:
     file: 'dnsapitoken.txt'
-
-networks:
-  proxy:
-    external: true
