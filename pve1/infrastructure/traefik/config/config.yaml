@@ -23,7 +23,7 @@ http:
       headers:
         frameDeny: true
         sslRedirect: true
-        browserSslFilter: true
+        browserXssFilter: true
         contentTypeNoSniff: true
         forceSTSHeader: true
         stsIncludeSubdomains: true
