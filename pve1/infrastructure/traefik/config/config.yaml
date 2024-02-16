@@ -2,10 +2,11 @@ http:
   routers:
     pve1:
       entrypoints:
-        - 'http'
+        - 'https'
       rule: 'Host(`pve1.local.michaelcook.dev`)'
       middlewares:
-        - default-headers
+        - 'default-headers'
+        - 'https-redirect'
       tls: {}
       service: pve1
   services:
@@ -16,13 +17,12 @@ http:
         passHostHeader: true
   middlewares:
     https-redirect:
-      redirect-scheme:
+      redirectScheme:
         scheme: 'https'
 
     default-headers:
       headers:
         frameDeny: true
-        sslRedirect: true
         browserXssFilter: true
         contentTypeNoSniff: true
         forceSTSHeader: true
