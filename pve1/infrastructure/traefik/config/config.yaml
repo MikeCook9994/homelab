@@ -28,7 +28,7 @@ http:
         forceSTSHeader: true
         stsIncludeSubdomains: true
         stsPreload: true
-        stsSecconds: 15552000
+        stsSeconds: 15552000
         customFrameOptionsValue: 'SAMEORIGIN'
         customRequestHeaders: 
           X-Forwarded-Proto: 'https'
