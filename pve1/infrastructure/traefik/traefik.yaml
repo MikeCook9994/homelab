@@ -15,7 +15,8 @@ providers:
     endpoint: 'unix://var/run/docker.sock'
     exposedByDefault: false
   file:
-    filename: '/config.yaml'
+    directory: '/config'
+    watch: true
 certificatesResolvers:
   cloudflare:
     acme:

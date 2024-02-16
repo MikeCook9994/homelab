@@ -1,0 +1,45 @@
+http:
+  routers:
+    pve1:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`pve1.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: pve1
+  services:
+    pve1:
+      loadBalancer:
+        servers:
+          - url: 'https://192.168.1.21:8006'
+        passHostHeader: true
+  middlewares:
+    https-redirect:
+      redirectScheme:
+        scheme: 'https'
+
+    default-headers:
+      headers:
+        frameDeny: true
+        browserXssFilter: true
+        contentTypeNoSniff: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 15552000
+        customFrameOptionsValue: 'SAMEORIGIN'
+        customRequestHeaders: 
+          X-Forwarded-Proto: 'https'
+
+    default-whitelist:
+      ipWhiteList:
+        sourceRange:
+          - '192.168.0.0/16'
+
+    secured:
+      chain:
+        middlewares:
+          - 'default-whitelist'
+          - 'default-headers'
