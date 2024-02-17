@@ -67,6 +67,15 @@ http:
         - 'https-redirect'
       tls: {}
       service: 'ddb-importer'
+    gateway:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`gateway.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: 'gateway'
   services:
     pve1:
       loadBalancer:
@@ -76,12 +85,12 @@ http:
     ph1:
       loadBalancer:
         servers:
-          - url: 'http://192.168.1.53'
+          - url: 'http://192.168.1.53:80'
         passHostHeader: true
     ph2:
       loadBalancer:
         servers:
-          - url: 'http://192.168.1.54'
+          - url: 'http://192.168.1.54:80'
         passHostHeader: true
     portainer:
       loadBalancer:
@@ -98,6 +107,10 @@ http:
         servers:
           - url: 'http://192.168.1.105:30001'
         passHostHeader: true
+    gateway:
+      loadBalancer:
+        servers:
+          - url: 'http://192.168.1.1:80'
   middlewares:
     pihole-addprefix:
       addPrefix:
