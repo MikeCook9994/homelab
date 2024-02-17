@@ -16,8 +16,8 @@ http:
       middlewares:
         - 'default-headers'
         - 'https-redirect'
-        - 'addprefix-pihole'
-        - 'redirectregex-pihole'
+        - 'pihole-addprefix'
+        - 'pihole-redirectregex'
       tls: {}
       service: ph1
     ph2:
@@ -27,8 +27,8 @@ http:
       middlewares:
         - 'default-headers'
         - 'https-redirect'
-        - 'addprefix-pihole'
-        - 'redirectregex-pihole'
+        - 'pihole-addprefix'
+        - 'pihole-redirectregex'
       tls: {}
       service: ph2
     portainer:
@@ -49,12 +49,12 @@ http:
     ph1:
       loadBalancer:
         servers:
-          - url: 'https://192.168.1.53'
+          - url: 'http://192.168.1.53'
         passHostHeader: true
     ph2:
       loadBalancer:
         servers:
-          - url: 'https://192.168.1.54'
+          - url: 'http://192.168.1.54'
         passHostHeader: true
     portainer:
       loadBalancer:
@@ -62,11 +62,11 @@ http:
           - url: 'https://192.168.1.102:9443'
         passHostHeader: true
   middlewares:
-    addprefix-pihole:
+    pihole-addprefix:
       addPrefix:
         prefix: "/admin"
 
-    redirectregex-pihole:
+    pihole-redirectregex:
       redirectRegex:
         regex: "/admin/(.*)"
         replacement: /
