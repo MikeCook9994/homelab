@@ -4,8 +4,8 @@ services:
     image: 'pihole/pihole:latest'
     hostname: 'ph2'
     volumes:
-      - '/root/pihole/etc:/etc/pihole'
-      - '/root/pihole/etc/dnsmasq.d:/etc/dnsmasq.d'
+      - './config:/etc/pihole'
+      - './config/dnsmasq.d:/etc/dnsmasq.d'
     environment:
       TZ: 'America/Los_Angeles'
       WEBPASSWORD_FILE: '/run/secrets/password'
