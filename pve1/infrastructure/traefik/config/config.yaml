@@ -8,7 +8,7 @@ http:
         - 'default-headers'
         - 'https-redirect'
       tls: {}
-      service: pve1
+      service: 'pve1'
     ph1:
       entrypoints:
         - 'https'
@@ -19,7 +19,7 @@ http:
         - 'pihole-addprefix'
         - 'https-redirect'
       tls: {}
-      service: ph1
+      service: 'ph1'
     ph2:
       entrypoints:
         - 'https'
@@ -30,7 +30,7 @@ http:
         - 'pihole-addprefix'
         - 'https-redirect'
       tls: {}
-      service: ph2
+      service: 'ph2'
     portainer:
       entrypoints:
         - 'https'
@@ -39,7 +39,34 @@ http:
         - 'default-headers'
         - 'https-redirect'
       tls: {}
-      service: portainer
+      service: 'portainer'
+    foundry:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`foundry.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: 'foundry'
+    foundry-external:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`foundry.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: 'foundry'
+    ddb-importer:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`ddb-importer.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: 'ddb-importer'
   services:
     pve1:
       loadBalancer:
@@ -60,6 +87,16 @@ http:
       loadBalancer:
         servers:
           - url: 'https://192.168.1.102:9443'
+        passHostHeader: true
+    foundry:
+      loadBalancer:
+        servers:
+          - url: 'http://192.168.1.105:30000'
+        passHostHeader: true
+    ddb-importer:
+      loadBalancer:
+        servers:
+          - url: 'http://192.168.1.105:30001'
         passHostHeader: true
   middlewares:
     pihole-addprefix:
