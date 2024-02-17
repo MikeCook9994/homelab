@@ -7,4 +7,4 @@ services:
       PRIMARY_HOST_PASSWORD: ''
       SECONDARY_HOST_1_BASE_URL: 'https://ph1.local.michaelcook.dev'
       SECONDARY_HOST_1_PASSWORD: ''
-      INTERVAL_MINUTES: 30
+      INTERVAL_MINUTES: 5
