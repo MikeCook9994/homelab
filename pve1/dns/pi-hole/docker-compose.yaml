@@ -11,14 +11,14 @@ services:
       WEBPASSWORD_FILE: '/run/secrets/password'
       DNSMASQ_LISTENING: 'local'
       PIHOLE_DNS_: '1.1.1.1;1.0.0.1;2606:4700:4700::1111;2606:4700:4700::1001'
-      DHCP_ACTIVE: true
+      DHCP_ACTIVE: false
       DHCP_START: '192.168.1.2'
       DHCP_END: '192.168.1.254'
       DHCP_ROUTER: '192.168.1.1'
       FTLCONF_LOCAL_IPV4: '192.168.1.54'
       PIHOLE_DOMAIN: 'local.michaelcook.dev'
       DNS_FQDN_REQUIRED: true
-      DNS_BONUS_PRIV: true
+      DNS_BOGUS_PRIV: true
     cap_add:
       - 'NET_ADMIN'
     network_mode: 'host'
