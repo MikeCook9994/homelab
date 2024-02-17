@@ -14,10 +14,10 @@ http:
         - 'https'
       rule: 'Host(`ph1.local.michaelcook.dev`)'
       middlewares:
-        - 'default-headers'
-        - 'https-redirect'
-        - 'pihole-addprefix'
         - 'pihole-redirectregex'
+        - 'default-headers'
+        - 'pihole-addprefix'
+        - 'https-redirect'
       tls: {}
       service: ph1
     ph2:
@@ -25,10 +25,10 @@ http:
         - 'https'
       rule: 'Host(`ph2.local.michaelcook.dev`)'
       middlewares:
-        - 'default-headers'
-        - 'https-redirect'
-        - 'pihole-addprefix'
         - 'pihole-redirectregex'
+        - 'default-headers'
+        - 'pihole-addprefix'
+        - 'https-redirect'
       tls: {}
       service: ph2
     portainer:
