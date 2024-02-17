@@ -9,11 +9,53 @@ http:
         - 'https-redirect'
       tls: {}
       service: pve1
+    ph1:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`ph1.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: ph1
+    ph2:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`ph2.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: ph2
+    portainer:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`portainer.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: portainer
   services:
     pve1:
       loadBalancer:
         servers:
-          - url: 'https://192.168.1.21:8006'
+          - url: 'https://192.168.1.100:8006'
+        passHostHeader: true
+    ph1:
+      loadBalancer:
+        servers:
+          - url: 'https://192.168.1.53'
+        passHostHeader: true
+    ph2:
+      loadBalancer:
+        servers:
+          - url: 'https://192.168.1.54'
+        passHostHeader: true
+    portainer:
+      loadBalancer:
+        servers:
+          - url: 'https://192.168.1.102:9443'
         passHostHeader: true
   middlewares:
     https-redirect:
