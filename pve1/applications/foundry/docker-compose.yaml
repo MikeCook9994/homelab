@@ -22,7 +22,7 @@ services:
 
   ddb_importer:
     container_name: 'ddb-importer'
-    image: ghcr.io/mrprimate/ddb-proxy:latest
+    image: 'ghcr.io/mrprimate/ddb-proxy:latest'
     ports:
       - '30001:3000/tcp'
     network_mode: 'bridge'

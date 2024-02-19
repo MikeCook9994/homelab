@@ -1,0 +1,59 @@
+include:
+  - '../postgresql/docker-compose.yaml'
+  - '../redis/docker-compose.yaml'
+
+services:
+  authentik-server:
+    image: 'ghcr.io/goauthentik/server:2023.10.7'
+    command: 'server'
+    environment:
+      AUTHENTIK_REDIS__HOST: 'redis'
+      AUTHENTIK_POSTGRESQL__HOST: 'postgresql'
+      AUTHENTIK_POSTGRESQL__USER: 'homelab'
+      AUTHENTIK_POSTGRESQL__NAME: 'homelab'
+      AUTHENTIK_POSTGRESQL__PASSWORD: 'file://run/secrets/postgres-password'
+    volumes:
+      - './media:/media'
+      - './custom-templates:/templates'
+    ports:
+      - '9000:9000'
+      - '9443:9443'
+    secrets:
+      - 'postgres-password'
+    depends_on:
+      - 'postgresql'
+      - 'redis'
+    restart: 'unless-stopped'
+  authentik-worker:
+    image: 'ghcr.io/goauthentik/server:2023.10.7'
+    command: 'worker'
+    environment:
+      AUTHENTIK_REDIS__HOST: 'redis'
+      AUTHENTIK_POSTGRESQL__HOST: 'postgresql'
+      AUTHENTIK_POSTGRESQL__USER: 'homelab'
+      AUTHENTIK_POSTGRESQL__NAME: 'homelab'
+      AUTHENTIK_POSTGRESQL__PASSWORD: 'file://run/secrets/postgres-password'
+    # `user: root` and the docker socket volume are optional.
+    # See more for the docker socket integration here:
+    # https://goauthentik.io/docs/outposts/integrations/docker
+    # Removing `user: root` also prevents the worker from fixing the permissions
+    # on the mounted folders, so when removing this make sure the folders have the correct UID/GID
+    # (1000:1000 by default)
+    user: root
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./media:/media
+      - ./certs:/certs
+      - ./custom-templates:/templates
+    secrets:
+      - 'postgres-password'
+    depends_on:
+      - postgresql
+      - redis
+    restart: 'unless-stopped'
+
+volumes:
+  database:
+    driver: local
+  redis:
+    driver: local
