@@ -76,6 +76,15 @@ http:
         - 'https-redirect'
       tls: {}
       service: 'gateway'
+    authentik:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`authentik.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: 'authentik:'
   services:
     pve1:
       loadBalancer:
@@ -111,6 +120,10 @@ http:
       loadBalancer:
         servers:
           - url: 'http://192.168.1.1:80'
+    authentik:
+      loadBalancer:
+        servers:
+          - url: 'http://192.168.1.103:9443'
   middlewares:
     pihole-addprefix:
       addPrefix:
