@@ -1,0 +1,13 @@
+services:
+  postgresql:
+    image: 'docker.io/library/postgres:12-alpine'
+    container_name: 'postgresql'
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_USER: homelab
+      POSTGRES_DB: homelab
+    env_file:
+      - .env
+    volumes:
+      - 'database:/var/lib/postgresql/data'
+    restart: 'unless-stopped'
