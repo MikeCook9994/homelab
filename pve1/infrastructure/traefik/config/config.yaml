@@ -84,7 +84,7 @@ http:
         - 'default-headers'
         - 'https-redirect'
       tls: {}
-      service: 'authentik:'
+      service: 'authentik'
   services:
     pve1:
       loadBalancer:
