@@ -12,7 +12,7 @@ services:
       AUTHENTIK_POSTGRESQL__HOST: 'postgresql'
       AUTHENTIK_POSTGRESQL__USER: 'homelab'
       AUTHENTIK_POSTGRESQL__NAME: 'homelab'
-      AUTHENTIK_POSTGRESQL__PASSWORD: 'file://run/secrets/postgres-password'
+      AUTHENTIK_POSTGRESQL__PASSWORD: 'file:///run/secrets/postgres-password'
     volumes:
       - './media:/media'
       - './custom-templates:/templates'
@@ -34,7 +34,7 @@ services:
       AUTHENTIK_POSTGRESQL__HOST: 'postgresql'
       AUTHENTIK_POSTGRESQL__USER: 'homelab'
       AUTHENTIK_POSTGRESQL__NAME: 'homelab'
-      AUTHENTIK_POSTGRESQL__PASSWORD: 'file://run/secrets/postgres-password'
+      AUTHENTIK_POSTGRESQL__PASSWORD: 'file:///run/secrets/postgres-password'
     # `user: root` and the docker socket volume are optional.
     # See more for the docker socket integration here:
     # https://goauthentik.io/docs/outposts/integrations/docker
