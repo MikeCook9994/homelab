@@ -54,6 +54,10 @@ services:
       - redis
     restart: 'unless-stopped'
 
+secrets:
+  postgres-password:
+    file: '../postgresql/password.txt'
+
 volumes:
   database:
     driver: local
