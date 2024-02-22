@@ -23,6 +23,7 @@ services:
       - '9443:9443'
     secrets:
       - 'postgres-password'
+      - 'authentik-secret-key'
     depends_on:
       - 'postgresql'
       - 'redis'
@@ -53,6 +54,7 @@ services:
       - ./custom-templates:/templates
     secrets:
       - 'postgres-password'
+      - 'authentik-secret-key'
     depends_on:
       - postgresql
       - redis
