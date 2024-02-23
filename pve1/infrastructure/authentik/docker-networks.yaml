@@ -1,3 +1,4 @@
 networks:
   authentik:
-    driver: bridge
+    name: 'authentik-bridge'
+    driver: 'bridge'

@@ -65,6 +65,11 @@ services:
       - 'authentik'
     restart: 'unless-stopped'
 
+networks:
+  authentik:
+    name: 'authentik-bridge'
+    driver: 'bridge'
+
 secrets:
   authentik-secret-key:
     file: 'secret.txt'
