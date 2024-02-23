@@ -10,6 +10,7 @@ services:
       - 'postgres-password'
     volumes:
       - 'database:/var/lib/postgresql/data'
+    network_mode: 'bridge'
     restart: 'unless-stopped'
 
 secrets:

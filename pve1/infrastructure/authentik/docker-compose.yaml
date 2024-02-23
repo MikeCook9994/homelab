@@ -27,6 +27,7 @@ services:
     depends_on:
       - 'postgresql'
       - 'redis'
+    network_mode: 'bridge'
     restart: 'unless-stopped'
   authentik-worker:
     image: 'ghcr.io/goauthentik/server:2023.10.7'
@@ -58,6 +59,7 @@ services:
     depends_on:
       - postgresql
       - redis
+    network_mode: 'bridge'
     restart: 'unless-stopped'
 
 secrets:

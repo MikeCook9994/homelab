@@ -5,4 +5,5 @@ services:
     command: '--save 60 1 --loglevel warning'
     volumes:
       - 'redis:/data'
+    network_mode: 'bridge'
     restart: 'unless-stopped'
