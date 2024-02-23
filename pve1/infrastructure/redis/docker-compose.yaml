@@ -7,3 +7,7 @@ services:
       - 'redis:/data'
     network_mode: 'bridge'
     restart: 'unless-stopped'
+
+volumes:
+  redis:
+    driver: local

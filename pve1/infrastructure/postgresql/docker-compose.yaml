@@ -16,3 +16,7 @@ services:
 secrets:
   postgres-password:
     file: 'password.txt'
+
+volumes:
+  database:
+    driver: local
