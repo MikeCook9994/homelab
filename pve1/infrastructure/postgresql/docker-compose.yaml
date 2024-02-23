@@ -1,3 +1,6 @@
+include:
+  - './docker-networks.yaml'
+
 services:
   postgresql:
     image: 'docker.io/library/postgres:12-alpine'
@@ -10,7 +13,8 @@ services:
       - 'postgres-password'
     volumes:
       - 'database:/var/lib/postgresql/data'
-    network_mode: 'bridge'
+    networks:
+      - 'authentik'
     restart: 'unless-stopped'
 
 secrets:

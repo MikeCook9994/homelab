@@ -1,0 +1,3 @@
+networks:
+  authentik:
+    driver: bridge

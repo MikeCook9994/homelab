@@ -1,4 +1,5 @@
 include:
+  - './docker-networks.yaml'
   - '../postgresql/docker-compose.yaml'
   - '../redis/docker-compose.yaml'
 
@@ -27,7 +28,8 @@ services:
     depends_on:
       - 'postgresql'
       - 'redis'
-    network_mode: 'bridge'
+    networks:
+      - 'authentik'
     restart: 'unless-stopped'
   authentik-worker:
     image: 'ghcr.io/goauthentik/server:2023.10.7'
@@ -57,17 +59,12 @@ services:
       - 'postgres-password'
       - 'authentik-secret-key'
     depends_on:
-      - postgresql
-      - redis
-    network_mode: 'bridge'
+      - 'postgresql'
+      - 'redis'
+    networks:
+      - 'authentik'
     restart: 'unless-stopped'
 
 secrets:
   authentik-secret-key:
     file: 'secret.txt'
-
-volumes:
-  database:
-    driver: local
-  redis:
-    driver: local
