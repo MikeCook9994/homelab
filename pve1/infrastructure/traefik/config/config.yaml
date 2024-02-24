@@ -67,7 +67,7 @@ http:
         - 'default-headers'
         - 'https-redirect'
       tls: {}
-      serivce: 'authentik-outpost'
+      service: 'authentik-outpost'
     ddb-importer:
       entrypoints:
         - 'https'
