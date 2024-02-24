@@ -4,7 +4,7 @@ include:
 
 services:
   authentik-server:
-    image: 'ghcr.io/goauthentik/server:2023.10.7'
+    image: 'ghcr.io/goauthentik/server:2024.2.1'
     container_name: 'authentik-server'
     command: 'server'
     environment:
@@ -29,7 +29,7 @@ services:
       - 'redis'
     restart: 'unless-stopped'
   authentik-worker:
-    image: 'ghcr.io/goauthentik/server:2023.10.7'
+    image: 'ghcr.io/goauthentik/server:2024.2.1'
     container_name: 'authentik-worker'
     command: 'worker'
     environment:
