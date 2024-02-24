@@ -1,3 +1,6 @@
+include:
+  - './docker-networks.yaml'
+
 services:
   redis:
     image: 'docker.io/library/redis:alpine'
@@ -5,4 +8,10 @@ services:
     command: '--save 60 1 --loglevel warning'
     volumes:
       - 'redis:/data'
+    networks:
+      - 'authentik'
     restart: 'unless-stopped'
+
+volumes:
+  redis:
+    driver: local
