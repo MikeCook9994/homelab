@@ -179,7 +179,7 @@ http:
     
     authentik-external:
       forwardAuth:
-        address: 'https://192.168.1.200:9443/outpost.goauthentik.io/auth/traefik'
+        address: 'http://192.168.1.200:9000/outpost.goauthentik.io/auth/traefik'
         trustForwardHeader: true
         authResponseHeaders:
           - 'X-authentik-username'
