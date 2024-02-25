@@ -148,7 +148,7 @@ http:
     authentik-outpost-external:
       loadBalancer:
         servers:
-          - url: 'https://authentik.michaelcook.dev/outpost.goauthentik.io'
+          - url: 'https://192.168.1.200:9443/outpost.goauthentik.io'
         passHostHeader: true
   middlewares:
     pihole-addprefix:
@@ -179,7 +179,7 @@ http:
     
     authentik-external:
       forwardAuth:
-        address: 'https://authentik.michaelcook.dev/outpost.goauthentik.io/auth/traefik'
+        address: 'https://192.168.1.200:9443/outpost.goauthentik.io/auth/traefik'
         trustForwardHeader: true
         authResponseHeaders:
           - 'X-authentik-username'
