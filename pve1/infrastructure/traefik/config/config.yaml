@@ -67,7 +67,7 @@ http:
         - 'default-headers'
         - 'https-redirect'
       tls: {}
-      service: 'authentik-outpost'
+      service: 'authentik-outpost-external'
     ddb-importer:
       entrypoints:
         - 'https'
@@ -145,7 +145,7 @@ http:
         servers:
           - url: 'https://192.168.1.200:9443'
         passHostHeader: true
-    authentik-outpost:
+    authentik-outpost-external:
       loadBalancer:
         servers:
           - url: 'https://authentik.michaelcook.dev/outpost.goauthentik.io'
