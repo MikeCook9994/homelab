@@ -1,0 +1,8 @@
+name: Homelab Deployment
+run-name: ${{ github.sha }}
+on:
+  workflow_dispatch
+jobs:
+  Deploy-Azure-Infrastructure:
+    runs-on: ubuntu-latest
+    steps: []
