@@ -2,7 +2,41 @@ name: Homelab Deployment
 run-name: ${{ github.sha }}
 on:
   workflow_dispatch
+env:
+  ENTRA_CLIENT_ID: '4bc6cc75-58c4-4f92-a195-940d1fd6e3f9'
+  ENTRA_TENANT_ID: 'd805168c-58f5-47d8-bf88-878e9bad98dc'
+  AZURE_SUBSCRIPTION_ID: 'ab0c60d7-f41e-4c34-a2d2-3ba35c9a0267'
 jobs:
   Deploy-Azure-Infrastructure:
     runs-on: ubuntu-latest
-    steps: []
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@main
+
+      - name: authenticate with azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ env.ENTRA_CLIENT_ID }}
+          tenant-id: ${{ env.ENTRA_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+      
+      - name: create resource group
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            resourceGroup="rg-homelab-westus"
+            exists=$(az group exists --name $resourceGroup)
+            if [ "$exists" != "true" ];
+            then
+              az group create -n $resourceGroup -l westus
+            fi
+      
+      - name: deploy arm resources
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: rg-homelab-westus
+          template: ./azure/main.bicep
+          parameters: 'storagePrefix=homelab storageSKU=Standard_LRS'
+          failOnStdErr: true
