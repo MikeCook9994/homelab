@@ -12,7 +12,6 @@ resource homelabKeyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
     }
     tenantId: homelabManagedIdentity.properties.tenantId
     enabledForTemplateDeployment: true
-    enablePurgeProtection: false
     enableSoftDelete: false
     enableRbacAuthorization: true
   }
