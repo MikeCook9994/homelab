@@ -41,5 +41,5 @@ jobs:
           subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: rg-homelab-westus
           template: ./azure/main.bicep
-          parameters: 'storagePrefix=homelab storageSKU=Standard_LRS'
+          parameters: 'storageName=homelab storageSKU=Standard_LRS'
           failOnStdErr: true
