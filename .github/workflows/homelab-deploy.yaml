@@ -2,12 +2,15 @@ name: Homelab Deployment
 run-name: ${{ github.sha }}
 on:
   workflow_dispatch
+permissions:
+  id-token: write
+  contents: read
 env:
   ENTRA_CLIENT_ID: '4bc6cc75-58c4-4f92-a195-940d1fd6e3f9'
   ENTRA_TENANT_ID: 'd805168c-58f5-47d8-bf88-878e9bad98dc'
   AZURE_SUBSCRIPTION_ID: 'ab0c60d7-f41e-4c34-a2d2-3ba35c9a0267'
 jobs:
-  Deploy-Azure-Infrastructure:
+  deploy-azure-infrastructure:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
