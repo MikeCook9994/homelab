@@ -1,30 +1,46 @@
-@minLength(3)
-@maxLength(11)
-param storageName string
+resource homelabManagedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-07-31-preview' existing = {
+  name: 'id-homelab-westus'
+}
 
-@allowed([
-  'Standard_LRS'
-  'Standard_GRS'
-  'Standard_RAGRS'
-  'Standard_ZRS'
-  'Premium_LRS'
-  'Premium_ZRS'
-  'Standard_GZRS'
-  'Standard_RAGZRS'
-])
-param storageSKU string = 'Standard_LRS'
-param location string = resourceGroup().location
-
-resource stg 'Microsoft.Storage/storageAccounts@2023-04-01' = {
-  name: 'stg${storageName}${location}'
-  location: location
-  sku: {
-    name: storageSKU
-  }
-  kind: 'StorageV2'
+resource homelabKeyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
+  name: 'kv-homelab-westus'
+  location: 'westus'
   properties: {
-    supportsHttpsTrafficOnly: true
+    sku: {
+      family: 'A'
+      name: 'standard'
+    }
+    tenantId: homelabManagedIdentity.properties.tenantId
+    enabledForTemplateDeployment: true
+    enablePurgeProtection: false
+    enableSoftDelete: false
+    enableRbacAuthorization: true
   }
 }
 
-output storageEndpoint object = stg.properties.primaryEndpoints
+func resolveRoleDefinitionId(assignmentScopeName string, assignmentTargetName string, roleDefinitionId string) string =>
+  guid(assignmentScopeName, assignmentTargetName, roleDefinitionId)
+
+var keyVaultReaderRoleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '21090545-7ca7-4776-b22c-e363652d74d2') // Key Vault Reader
+
+resource homelabMSIKeyVaultReaderAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: resolveRoleDefinitionId(homelabKeyVault.name, homelabManagedIdentity.name, keyVaultReaderRoleDefinitionId)
+  scope: homelabKeyVault
+  properties: {
+    roleDefinitionId: keyVaultReaderRoleDefinitionId
+    principalId: homelabManagedIdentity.properties.principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+var keyVaultSecretsUserRoleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6') // Key Vault Secrets User
+
+resource homelabMSIKeyVaultSecretUserAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: resolveRoleDefinitionId(homelabKeyVault.name, homelabManagedIdentity.name, keyVaultSecretsUserRoleDefinitionId)
+  scope: homelabKeyVault
+  properties: {
+    roleDefinitionId: keyVaultSecretsUserRoleDefinitionId
+    principalId: homelabManagedIdentity.properties.principalId
+    principalType: 'ServicePrincipal'
+  }
+}
