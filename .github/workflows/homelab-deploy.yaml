@@ -28,5 +28,6 @@ jobs:
         with:
           subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: rg-homelab-westus
+          scope: 'resourcegroup'
           template: ./azure/main.bicep
           failOnStdErr: true
