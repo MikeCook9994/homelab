@@ -1,2 +1,11 @@
-[hosts]
-192.168.1.100
+[proxmox]
+pve1
+
+[docker]
+cleric
+paladin
+warlock
+
+[pihole]
+rpi1
+ranger

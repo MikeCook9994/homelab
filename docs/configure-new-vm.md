@@ -8,6 +8,8 @@ These steps should be executed on a new LXC or VM to consistently configure logi
 
 Run `useradd -m -s /usr/bin/bash -G sudo mike && mkdir /home/mike/.ssh && chown mike:mike /home/mike/.ssh`
 
+If this is a docker vm/lxc run `usermod -aG docker mike`
+
 We intentionally don't set a password so the user cannot be signed into locally, only via ssh.
 
 ## Passwordless sudo for `mike`
@@ -16,6 +18,7 @@ as `root`, `EDITOR=vim visudo`. Add `mike ALL=(ALL) NOPASSWD:ALL` to the `/etc/s
 
 ## generate SSH Keys for `mike`
 
+`login mike`
 `ssh-keygen`
 
 Add the public key to your github account
