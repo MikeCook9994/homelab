@@ -4,17 +4,19 @@ These steps should be executed on a new LXC or VM to consistently configure logi
 
 `apt-get install vim keychain`
 
-## Create `mike` User
+## Create Users
 
-Run `useradd -m -s /usr/bin/bash -G sudo mike && mkdir /home/mike/.ssh && chown mike:mike /home/mike/.ssh`
+`useradd -m -s /usr/bin/bash -G sudo mike && mkdir /home/mike/.ssh && chown mike:mike /home/mike/.ssh && passwd -d mike`
 
 If this is a docker vm/lxc run `usermod -aG docker mike`
 
-We intentionally don't set a password so the user cannot be signed into locally, only via ssh.
+`useradd -m -s /usr/bin/bash -G sudo deployer && mkdir /home/deployer/.ssh && chown deployer:deployer /home/deployer/.ssh && passwd -d deployer`
 
-## Passwordless sudo for `mike`
+## Passwordless sudo
 
 as `root`, `EDITOR=vim visudo`. Add `mike ALL=(ALL) NOPASSWD:ALL` to the `/etc/sudoers` file.
+
+as `root`, `EDITOR=vim visudo`. Add `deployer ALL=(ALL) NOPASSWD:ALL` to the `/etc/sudoers` file.
 
 ## generate SSH Keys for `mike`
 
@@ -37,7 +39,7 @@ This will automatically start the ssh agent
 
 ## Copy authorized keys
 
-Copy the appropriate public keys in the `publickey` file on this repository to each the mike and root user's `authorized_keys` files.
+Copy the appropriate public keys in the `publickey` file on this repository to each the mike, deployer, and root user's `authorized_keys` files.
 
 ## Configure SSH
 
@@ -68,6 +70,8 @@ Edit `/etc/ssh/sshd_config`
   * `UsePAM yes`
   * Add `Match User root Address <pve1_host_ip>` to the bottom
     * `PermitRootLogin yes`
+  * Add `Match Group deployer` to the bottom
+    * `AuthenticationMethods publickey`
 
 Execute `service ssh restart`
 
