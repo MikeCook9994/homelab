@@ -8,9 +8,3 @@ Before even bringing the device online, review the mac address in the VMs networ
 
 `rm -v /etc/ssh/ssh_host_*`
 `dpkg-reconfigure openssh-server`
-
-## Clone homelab repo
-
-`git clone git@github.com:MikeCook9994/homelab.git`
-
-## Add mike to docker group

@@ -11,10 +11,12 @@ Do the thing
 
 ## Setting up WSL
 
+From the WSL host:
 `wsl --unregister`
 `wsl --install -d Ubuntu 24.04`
-`apt update`
-`apt upgrade`
+
+From the WSL terminal:
+`apt update && apt upgrade`
 
 [Create the `mike` user](./configure-new-vm.md#create-mike-user)
 [Passwordless sudo for `mike`](./configure-new-vm.md#passwordless-sudo-for-mike)
@@ -28,9 +30,13 @@ Do the thing
 Edit `/home/mike/.ssh` Add the following
 
 ```bash
+# starts keychain to help persist ssh passphrases between terminals 
 /usr/bin/keychain -q --nogui $HOME/.ssh/id_rsa
 source $HOME/.keychain/$(hostname)-sh
 ```
+
+From the WSL host:
+`ubuntu2404 config --default-user mike`
 
 ## Installing Ansible
 

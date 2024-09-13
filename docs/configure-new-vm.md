@@ -2,7 +2,7 @@ These steps should be executed on a new LXC or VM to consistently configure logi
 
 ## Install Packages
 
-`apt-get install vim`
+`apt-get install vim keychain`
 
 ## Create `mike` User
 
@@ -21,26 +21,23 @@ as `root`, `EDITOR=vim visudo`. Add `mike ALL=(ALL) NOPASSWD:ALL` to the `/etc/s
 `login mike`
 `ssh-keygen`
 
-Add the public key to your github account
+Add the public key to your github account and copy it to this repo's `publickey` file.
 
 ## Setup SSH Agent
 
 Add the following to `/home/mike/.bashrc`
 
 ```bash
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-    eval `ssh-agent -s`
-fi
+# starts keychain to help persist ssh passphrases between terminals 
+/usr/bin/keychain -q --nogui $HOME/.ssh/id_ed25519
+source $HOME/.keychain/$(hostname)-sh
 ```
 
-This will automatically start the 
+This will automatically start the ssh agent
 
 ## Copy authorized keys
 
-Copy the authorized keys for the root user on the proxmox host to the root and mike user's ssh folders on the LXC/vm
-
-`scp 192.168.1.100:/root/.ssh/authorized_keys /root/.ssh/authorized_keys`
-`scp 192.168.1.100:/home/mike/.ssh/authorized_keys /home/mike/.ssh/authorized_keys && chown mike:mike /home/mike/.ssh/authorized_keys`
+Copy the appropriate public keys in the `publickey` file on this repository to each the mike and root user's `authorized_keys` files.
 
 ## Configure SSH
 
@@ -53,6 +50,8 @@ Restart the ssh service: `service ssh restart`.
 
 ## Configure 2FA
 
+If this was already done on the host OS, copy the google authenticator settings to the `root` and `mike` users from that node.
+
 Execute `apt-get install libpam-google-authenticator`
 Execute `google-authenticator -t -d -f -r 3 -R 30 -w 3`
   * Take note of the secret key and recovery codes
@@ -60,13 +59,14 @@ Execute `google-authenticator -t -d -f -r 3 -R 30 -w 3`
 Execute `cp ~/.google-authenticator /home/mike && chown mike:mike /home/mike/.google-authenticator`
 
 Edit `/etc/pam.d/sshd`
+  * Comment out `@include common-auth`
   * Add `auth required pam_google_authenticator.so` to the bottom
 
 Edit `/etc/ssh/sshd_config`
   * `KbdInteractiveAuthentication yes`
-  * `AuthenticationMethods publickey, keyboard-interactive`
+  * `AuthenticationMethods publickey,keyboard-interactive`
   * `UsePAM yes`
-  * Add `Match User root Address 192.168.1.100` to the bottom
+  * Add `Match User root Address <pve1_host_ip>` to the bottom
     * `PermitRootLogin yes`
 
 Execute `service ssh restart`
