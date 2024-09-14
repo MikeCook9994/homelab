@@ -9,6 +9,8 @@ Do the thing
 `ssh-agent`
 `ssh-add`
 
+Add the environment variable `GIT_SSH` with value `C:\Windows\System32\OpenSSH\ssh.exe` 
+
 ## Setting up WSL
 
 From the WSL host:
