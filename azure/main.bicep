@@ -44,6 +44,18 @@ resource homelabMSIKeyVaultReaderAssignment 'Microsoft.Authorization/roleAssignm
   }
 }
 
+var myPrincipalId = 'me@michaelcook.dev'
+
+resource myKeyVaultReaderAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: resolveRoleDefinitionId(homelabKeyVault.name, myPrincipalId, keyVaultReaderRoleDefinitionId)
+  scope: homelabKeyVault
+  properties: {
+    roleDefinitionId: keyVaultReaderRoleDefinitionId
+    principalId: myPrincipalId
+    principalType: 'User'
+  }
+}
+
 var keyVaultSecretsUserRoleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6') // Key Vault Secrets User
 
 resource homelabMSIKeyVaultSecretUserAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -53,5 +65,15 @@ resource homelabMSIKeyVaultSecretUserAssignment 'Microsoft.Authorization/roleAss
     roleDefinitionId: keyVaultSecretsUserRoleDefinitionId
     principalId: homelabManagedIdentity.properties.principalId
     principalType: 'ServicePrincipal'
+  }
+}
+
+resource myKeyVaultSecretUserAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: resolveRoleDefinitionId(homelabKeyVault.name, myPrincipalId, keyVaultSecretsUserRoleDefinitionId)
+  scope: homelabKeyVault
+  properties: {
+    roleDefinitionId: keyVaultSecretsUserRoleDefinitionId
+    principalId: myPrincipalId
+    principalType: 'User'
   }
 }
