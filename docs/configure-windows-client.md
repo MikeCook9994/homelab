@@ -40,6 +40,25 @@ From the WSL host:
 
 ## Installing Ansible
 
+### Install Global Packages
+
 `apt install software-properties-common`
-`apt-add-repository --yes --update ppa:...`
-`apt install ansible`
+`apt install python3-pip python3-venv`
+
+### Configure Python Virtual Environment
+
+`mkdir ~/python-venv`
+`cd ~/python-venv`
+`python3 -m venv ansible`
+`source ansible/bin/activate`
+`python3 -m pip install --upgrade pip`
+`python3 -m pip install ansible`
+`python3 -m pip install setuptools`
+`ansible-galaxy collection install azure.azcollection --force`
+`pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt`
+
+### Install Az CLI
+
+Windows will make its cli available to linux which breaks session token availability. Install the CLI locally to resolve this.
+
+`curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash`
