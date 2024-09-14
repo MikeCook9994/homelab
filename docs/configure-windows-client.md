@@ -44,8 +44,7 @@ From the WSL host:
 
 ### Install Global Packages
 
-`apt install software-properties-common`
-`apt install python3-pip python3-venv`
+`apt install software-properties-common python3-pip python3-venv jq`
 
 ### Configure Python Virtual Environment
 
@@ -56,6 +55,9 @@ From the WSL host:
 `python3 -m pip install --upgrade pip`
 `python3 -m pip install ansible`
 `python3 -m pip install setuptools`
+
+These may not be necessary now that I'm not using azure in ansible
+
 `ansible-galaxy collection install azure.azcollection --force`
 `pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt`
 
