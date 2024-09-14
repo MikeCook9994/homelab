@@ -1,0 +1,9 @@
+- hosts: proxmox
+  become: yes
+  vars:
+    ansible_become_password: "{{ lookup('env', 'DEPLOYER_SUDO_PASSWORD') }}"
+  tasks:
+  - name: apt
+    apt:
+      update_cache: yes
+      upgrade: yes
