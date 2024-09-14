@@ -30,13 +30,17 @@ If this is a fresh deployment, generate a password for the `deployer` user. Then
 1. Create an environment variable in the github repo called `DEPLOYER_SUDO_PASSWORD` and set it equal to the value. 
 2. Run `passwd deployer` and set the password equal to the value stored in the `deployerSudoPassword` secret in the keyvault.
 
-## Passwordless sudo 
+## Passwordless sudo
 
 as `root`, `EDITOR=vim visudo`. Add `mike ALL=(ALL) NOPASSWD:ALL` to the `/etc/sudoers` file.
 
 ## Generate SSH Keys
 
 Generate SSH keys for the `root` user. Copy the public key to this repo's `publickey` file.
+
+## Copy authorized keys
+
+Copy the appropriate public keys in the `publickey` file on this repository to each the mike, deployer, and root user's `authorized_keys` files.
 
 ## Configure SSH
 
@@ -45,13 +49,9 @@ Generate SSH keys for the `root` user. Copy the public key to this repo's `publi
 
 Restart ssh daemon `service ssh restart`
 
-## Copy authorized keys
-
-Copy the appropriate public keys in the `publickey` file on this repository to each the mike, deployer, and root user's `authorized_keys` files.
-
 ## Setup SSH Agent
 
-Add the following to `/home/root/.bashrc`
+Add the following to `/root/.bashrc`
 
 ```bash
 # starts keychain to help persist ssh passphrases between terminals 
