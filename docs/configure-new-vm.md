@@ -73,6 +73,12 @@ Edit `/etc/ssh/sshd_config`
 
 Execute `service ssh restart`
 
+## clone homelab repo
+
+`git clone git@github.com:MikeCook9994/homelab.git`
+`git config --global user.email "mcook4728@gmail.com"`
+`git config --global user.name "Michael Cook"`
+
 ## Create Template
 
 If this is an LXC/VM that multiple instances will be needed off, create a template so new instances can quickly be spun up.

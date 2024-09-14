@@ -10,3 +10,4 @@
 
 * https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-github-actions?tabs=CLI%2Copenid
   * Discusses the steps necessary to configure a github actions to be able to create ARM resources
+  * Use Entity -> Environment, Environment -> Prod
