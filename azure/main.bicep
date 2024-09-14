@@ -44,7 +44,7 @@ resource homelabMSIKeyVaultReaderAssignment 'Microsoft.Authorization/roleAssignm
   }
 }
 
-var myPrincipalId = 'me@michaelcook.dev'
+var myPrincipalId = '533bac63-71fe-40d8-b822-b2e5aa71d5b9'
 
 resource myKeyVaultReaderAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: resolveRoleDefinitionId(homelabKeyVault.name, myPrincipalId, keyVaultReaderRoleDefinitionId)
