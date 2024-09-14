@@ -9,6 +9,7 @@ env:
   ENTRA_CLIENT_ID: 'a60890d9-ee67-4485-9423-14329aef04c9'
   ENTRA_TENANT_ID: 'd805168c-58f5-47d8-bf88-878e9bad98dc'
   AZURE_SUBSCRIPTION_ID: 'ab0c60d7-f41e-4c34-a2d2-3ba35c9a0267'
+
 jobs:
   deploy-azure-infrastructure:
     runs-on: ubuntu-latest
@@ -25,9 +26,12 @@ jobs:
 
       - name: deploy arm resources
         uses: azure/arm-deploy@v1
+        env:
+          DEPLOYER_SUDO_PASSWORD: ${{ secrets.DEPLOYER_SUDO_PASSWORD }}
         with:
           subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: rg-homelab-westus
           scope: 'resourcegroup'
           template: ./azure/main.bicep
+          parameters: ./azure/main.bicepparam
           failOnStdErr: true

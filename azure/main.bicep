@@ -1,3 +1,6 @@
+@secure()
+param deployerSudoPassword string
+
 resource homelabManagedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-07-31-preview' existing = {
   name: 'id-homelab-westus'
 }
@@ -14,6 +17,15 @@ resource homelabKeyVault 'Microsoft.KeyVault/vaults@2024-04-01-preview' = {
     enabledForTemplateDeployment: true
     enableSoftDelete: false
     enableRbacAuthorization: true
+  }
+  resource deployerSudoPasswordSecret 'secrets' = {
+    name: 'deployerSudoPassword'
+    properties: {
+      attributes: {
+        enabled: true
+      }
+      value: deployerSudoPassword
+    }
   }
 }
 

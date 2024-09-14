@@ -6,17 +6,15 @@ These steps should be executed on a new LXC or VM to consistently configure logi
 
 ## Create Users
 
-`useradd -m -s /usr/bin/bash -G sudo mike && mkdir /home/mike/.ssh && chown mike:mike /home/mike/.ssh && passwd -d mike`
+[Create mike and deployer users](./configure-proxmox-host.md#create-users)
 
 If this is a docker vm/lxc run `usermod -aG docker mike`
 
-`useradd -m -s /usr/bin/bash -G sudo deployer && mkdir /home/deployer/.ssh && chown deployer:deployer /home/deployer/.ssh && passwd -d deployer`
+Set the `deployer` user's password to the value of the `deployerSudoPassword` stored in the keyvault.
 
 ## Passwordless sudo
 
-as `root`, `EDITOR=vim visudo`. Add `mike ALL=(ALL) NOPASSWD:ALL` to the `/etc/sudoers` file.
-
-as `root`, `EDITOR=vim visudo`. Add `deployer ALL=(ALL) NOPASSWD:ALL` to the `/etc/sudoers` file.
+[Grant mike passwordless sudo permissions](./configure-proxmox-host.md#passwordless-sudo)
 
 ## generate SSH Keys for `mike`
 
@@ -24,6 +22,19 @@ as `root`, `EDITOR=vim visudo`. Add `deployer ALL=(ALL) NOPASSWD:ALL` to the `/e
 `ssh-keygen`
 
 Add the public key to your github account and copy it to this repo's `publickey` file.
+
+## Configure SSH
+
+Make the following changes to `/etc/ssh/sshd_config`
+
+1. `PasswordAuthentication no`
+2. `PermitRootLogin no`
+
+Restart the ssh service: `service ssh restart`.
+
+## Copy authorized keys
+
+Copy the appropriate public keys in the `publickey` file on this repository to each the mike, deployer, and root user's `authorized_keys` files.
 
 ## Setup SSH Agent
 
@@ -36,19 +47,6 @@ source $HOME/.keychain/$(hostname)-sh
 ```
 
 This will automatically start the ssh agent
-
-## Copy authorized keys
-
-Copy the appropriate public keys in the `publickey` file on this repository to each the mike, deployer, and root user's `authorized_keys` files.
-
-## Configure SSH
-
-Make the following changes to `/etc/ssh/sshd_config`
-
-1. `PasswordAuthentication no`
-2. `PermitRootLogin no`
-
-Restart the ssh service: `service ssh restart`.
 
 ## Configure 2FA
 
