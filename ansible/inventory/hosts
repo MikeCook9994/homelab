@@ -2,9 +2,7 @@
 pve1
 
 [docker]
-cleric
-paladin
-warlock
+docker
 
 [pihole]
 rpi1

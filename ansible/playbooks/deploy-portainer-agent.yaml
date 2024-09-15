@@ -1,0 +1,16 @@
+- hosts: docker
+  tasks:
+  - name: Ensure Portainer Agent Directory Exists
+    file:
+      path: ~/portainer-agent
+      recurse: true
+      state: directory
+  - name: Copy Docker Compose
+    copy:
+      src: ~/homelab/pve1/common/portainer-agent/docker-compose.yaml
+      dest: ~/portainer-agent/docker-compose.yaml
+  - name: Deploy Docker Compose Stack
+    community.docker.docker_compose_v2:
+      project_src: ~/portainer-agent
+      files:
+      - docker-compose.yaml
