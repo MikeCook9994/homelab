@@ -8,7 +8,7 @@ These steps should be executed on a new LXC or VM to consistently configure logi
 
 [Create mike and deployer users](./configure-proxmox-host.md#create-users)
 
-If this is a docker vm/lxc run `usermod -aG docker mike`
+If this is a docker vm/lxc run `usermod -aG docker mike` and `usermod -aG docker deployer`
 
 Set the `deployer` user's password to the value of the `deployerSudoPassword` stored in the keyvault.
 
