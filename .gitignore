@@ -7,6 +7,10 @@
 /**/dnsapitoken.*
 /**/acme.json
 
+/pve1/applications/foundry/secrets.json
+/pve1/applications/foundry/users
+/pve1/applications/foundry/data
+
 # pi hole config we don't want to source control
 /**/pi-hole/config/dhcp.leases
 /**/pi-hole/config/dns-servers.conf

@@ -13,7 +13,7 @@ services:
       FOUNDRY_PROXY_SSL: true
       FOUNDRY_PROXY_PORT: 443
     volumes:
-      - '/root/foundryvtt/data:/data'
+      - '/home/mike/homelab/pve1/applications/foundry/data:/data'
     secrets:
       - source: 'config'
         target: 'config.json'
