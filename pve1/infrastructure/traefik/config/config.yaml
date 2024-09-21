@@ -1,36 +1,36 @@
 http:
   routers:
-    pve1:
+    proxmox:
       entrypoints:
         - 'https'
-      rule: 'Host(`pve1.local.michaelcook.dev`)'
+      rule: 'Host(`proxmox.local.michaelcook.dev`)'
       middlewares:
         - 'default-headers'
         - 'https-redirect'
       tls: {}
-      service: 'pve1'
-    ph1:
+      service: 'proxmox'
+    pihole-primary:
       entrypoints:
         - 'https'
-      rule: 'Host(`ph1.local.michaelcook.dev`)'
-      middlewares:
-        - 'pihole-redirectregex'
-        - 'default-headers'
-        - 'pihole-addprefix'
-        - 'https-redirect'
-      tls: {}
-      service: 'ph1'
-    ph2:
-      entrypoints:
-        - 'https'
-      rule: 'Host(`ph2.local.michaelcook.dev`)'
+      rule: 'Host(`pihole-primary.local.michaelcook.dev`)'
       middlewares:
         - 'pihole-redirectregex'
         - 'default-headers'
         - 'pihole-addprefix'
         - 'https-redirect'
       tls: {}
-      service: 'ph2'
+      service: 'pihole-primary'
+    pihole-secondary:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`pihole-secondary.local.michaelcook.dev`)'
+      middlewares:
+        - 'pihole-redirectregex'
+        - 'default-headers'
+        - 'pihole-addprefix'
+        - 'https-redirect'
+      tls: {}
+      service: 'pihole-secondary'
     portainer:
       entrypoints:
         - 'https'
@@ -105,17 +105,17 @@ http:
       tls: {}
       service: 'authentik'
   services:
-    pve1:
+    proxmox:
       loadBalancer:
         servers:
           - url: 'https://192.168.1.100:8006'
         passHostHeader: true
-    ph1:
+    pihole-primary:
       loadBalancer:
         servers:
           - url: 'http://192.168.1.53:80'
         passHostHeader: true
-    ph2:
+    pihole-secondary:
       loadBalancer:
         servers:
           - url: 'http://192.168.1.254:80'
@@ -138,7 +138,7 @@ http:
     gateway:
       loadBalancer:
         servers:
-          - url: 'http://192.168.1.1:80'
+          - url: 'https://192.168.1.1:443'
         passHostHeader: true
     authentik:
       loadBalancer:
