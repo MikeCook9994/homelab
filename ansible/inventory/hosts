@@ -1,9 +1,10 @@
 [proxmox]
-pve1
+pve1.local.michaelcook.dev
 
 [docker]
-docker
+cleric.local.michaelcook.dev
+paladin.local.michaelcook.dev
+warlock.local.michaelcook.dev
 
 [pihole]
-rpi1
-ranger
+ph1.local.michaelcook.dev
