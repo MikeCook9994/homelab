@@ -1,7 +1,7 @@
 services:
   foundry_vtt:
     container_name: 'foundryvtt'
-    image: 'felddy/foundryvtt:release'
+    image: 'felddy/foundryvtt:12.331'
     ports:
       - '30000:30000/tcp'
     environment:
