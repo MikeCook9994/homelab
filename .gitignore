@@ -1,5 +1,6 @@
 .vscode
 
+/**/secret.*
 /**/users.txt
 /**/secrets.*
 /**/password.*
@@ -7,9 +8,13 @@
 /**/dnsapitoken.*
 /**/acme.json
 
-/pve1/applications/foundry/secrets.json
-/pve1/applications/foundry/users
-/pve1/applications/foundry/data
+/pve1/warlock/foundry/users
+/pve1/warlock/foundry/data
+/pve1/paladin/authentik/certs
+/pve1/paladin/authentik/custom-templates
+/pve1/paladin/authentik/media
+/pve1/paladin/postgresql/data
+/pve1/paladin/redis/data
 
 # pi hole config we don't want to source control
 /**/pi-hole/config/dhcp.leases

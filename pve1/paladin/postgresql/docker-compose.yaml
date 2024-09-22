@@ -12,7 +12,7 @@ services:
     secrets:
       - 'postgres-password'
     volumes:
-      - 'database:/var/lib/postgresql/data'
+      - '/home/mike/homelab/pve1/infrastructure/postgresql/data:/var/lib/postgresql/data'
     networks:
       - 'authentik'
     restart: 'unless-stopped'
@@ -20,7 +20,3 @@ services:
 secrets:
   postgres-password:
     file: 'password.txt'
-
-volumes:
-  database:
-    driver: local
