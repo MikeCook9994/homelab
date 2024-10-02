@@ -17,8 +17,8 @@ services:
       AUTHENTIK_SECRET_KEY: 'file:///run/secrets/authentik-secret-key'
       AUTHENTIK_ERROR_REPORTING__ENABLED: true
     volumes:
-      - '/home/mike/homelab/pve1/infrastructure/authentik/media:/media'
-      - '/home/mike/homelab/pve1/infrastructure/authentik/custom-templates:/templates'
+      - '/home/mike/homelab/pve1/paladin/authentik/media:/media'
+      - '/home/mike/homelab/pve1/paladin/authentik/custom-templates:/templates'
     ports:
       - '9000:9000'
       - '9443:9443'
@@ -52,9 +52,9 @@ services:
     user: root
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - '/home/mike/homelab/pve1/infrastructure/authentik/media:/media'
-      - '/home/mike/homelab/pve1/infrastructure/authentik/certs:/certs'
-      - '/home/mike/homelab/pve1/infrastructure/authentik/custom-templates:/templates'
+      - '/home/mike/homelab/pve1/paladin/authentik/media:/media'
+      - '/home/mike/homelab/pve1/paladin/authentik/certs:/certs'
+      - '/home/mike/homelab/pve1/paladin/authentik/custom-templates:/templates'
     secrets:
       - 'postgres-password'
       - 'authentik-secret-key'

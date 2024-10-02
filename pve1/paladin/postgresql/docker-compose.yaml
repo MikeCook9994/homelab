@@ -12,7 +12,7 @@ services:
     secrets:
       - 'postgres-password'
     volumes:
-      - '/home/mike/homelab/pve1/infrastructure/postgresql/data:/var/lib/postgresql/data'
+      - '/home/mike/homelab/pve1/paladin/postgresql/data:/var/lib/postgresql/data'
     networks:
       - 'authentik'
     restart: 'unless-stopped'

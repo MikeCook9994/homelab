@@ -7,7 +7,7 @@ services:
     container_name: 'redis'
     command: '--save 60 1 --loglevel warning'
     volumes:
-      - '/home/mike/homelab/pve1/infrastructure/redis/data:/data'
+      - '/home/mike/homelab/pve1/paladin/redis/data:/data'
     networks:
       - 'authentik'
     restart: 'unless-stopped'
