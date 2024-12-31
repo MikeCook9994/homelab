@@ -104,6 +104,15 @@ http:
         - 'https-redirect'
       tls: {}
       service: 'authentik'
+    octoprint:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`octoprint.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: 'octoprint'
   services:
     proxmox:
       loadBalancer:
@@ -149,6 +158,11 @@ http:
       loadBalancer:
         servers:
           - url: 'https://192.168.1.202:9443/outpost.goauthentik.io'
+        passHostHeader: true
+    octoprint:
+      loadBalancer:
+        servers:
+          - url: 'http://192.168.1.203:8001'
         passHostHeader: true
   middlewares:
     pihole-addprefix:
