@@ -1,0 +1,12 @@
+services:
+  foundry_vtt:
+    container_name: 'octoprint'
+    image: 'octoprint/octoprint:latest'
+    ports:
+      - 80:80
+    devices:
+      - '/dev/ttyUSB0:/dev/ttyUSB0'
+    volumes:
+      - '/home/mike/homelab/pve1/warlock/octoprint/data:/octoprint/data'
+    network_mode: 'bridge'
+    restart: 'unless-stopped'
