@@ -3,7 +3,7 @@ services:
     container_name: 'octoprint'
     image: 'octoprint/octoprint:latest'
     ports:
-      - 80:80
+      - 8001:80
     devices:
       - '/dev/bus/usb/001:/dev/bus/usb/001'
     volumes:

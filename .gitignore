@@ -10,6 +10,7 @@
 
 /pve1/warlock/foundry/users
 /pve1/warlock/foundry/data
+/pve1/warlock/octoprint/data
 /pve1/paladin/authentik/certs
 /pve1/paladin/authentik/custom-templates
 /pve1/paladin/authentik/media
