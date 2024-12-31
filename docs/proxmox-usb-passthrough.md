@@ -14,6 +14,6 @@ Now run `ls -la <device path>` to find the major and minor device numbers. They 
 `vim /etc/pve/lxc/<container_id>.conf`. The container id is the id number of the container that will host the docker container. This appears next to the LXC container's listing in the sidebar. Add the following to this file:
 
 `lxc.cgroup.devices.allow: c <major #>:* rwm`
-`lxc.mount.entry: /dev/bus/usb/<bus #> dev/bus/usb/<bus #> none bind,optional,create=file`
+`lxc.mount.entry: /dev/ttyUSB0 dev/ttyUSB0 none bind,optional,create=file`
 
 > Important: The target device path does not start with a `/`

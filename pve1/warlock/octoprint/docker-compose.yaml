@@ -5,7 +5,7 @@ services:
     ports:
       - 8001:80
     devices:
-      - '/dev/bus/usb/001:/dev/bus/usb/001'
+      - '/dev/ttyUSB0:/dev/ttyUSB0'
     volumes:
       - '/home/mike/homelab/pve1/warlock/octoprint/data:/octoprint/data'
     network_mode: 'bridge'
