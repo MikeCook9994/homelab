@@ -1,0 +1,10 @@
+services:
+  iperf3:
+    container_name: 'iperf3'
+    image: 'networkstatic/iperf3:latest'
+    command: 
+      - '-s'
+    ports:
+      - '5201:5201'
+    network_mode: 'bridge'
+    restart: 'always'
