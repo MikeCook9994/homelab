@@ -113,6 +113,15 @@ http:
         - 'https-redirect'
       tls: {}
       service: 'octoprint'
+    nvr:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`nvr.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: 'nvr'
   services:
     proxmox:
       loadBalancer:
@@ -163,6 +172,11 @@ http:
       loadBalancer:
         servers:
           - url: 'http://192.168.1.203:8001'
+        passHostHeader: true
+    nvr:
+      loadBalancer:
+        servers:
+          - url: 'http://192.168.1.75'
         passHostHeader: true
   middlewares:
     pihole-addprefix:

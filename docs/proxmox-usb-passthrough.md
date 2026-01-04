@@ -29,7 +29,7 @@ Replace the container id and container name as needed.
 ```bash
 cat << 'EOF' | sudo tee /usr/local/bin/mk_usb-for-warlock.sh
 #!/usr/bin/env bash
-sudo rm -f /dev/lxc/220/*container-link && sudo mkdir /dev/lxc && sudo mkdir /dev/lxc/220 && sudo cp -Lrp /dev/*-container-link /dev/lxc/220 && sudo chown 100000:100020 /dev/lxc/220/*
+sudo rm -f /dev/lxc/220/*container-link && sudo mkdir -p /dev/lxc/220 && sudo cp -Lrp /dev/*-container-link /dev/lxc/220 && sudo chown 100000:100020 /dev/lxc/220/*
 EOF
 sudo chmod 0750 /usr/local/bin/mk_usb-for-warlock.sh
 ```
