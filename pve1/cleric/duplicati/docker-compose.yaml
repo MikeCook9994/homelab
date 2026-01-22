@@ -6,9 +6,16 @@ services:
       PUID: '1000'
       PGID: '1000'
       TZ: 'America/Los_Angeles'
+      FILE__SETTINGS_ENCRYPTION_KEY: '/run/secrets/duplicati_encryption_key'
     volumes:
       - './config:/config'
       - './backups:/backups'
+    secrets:
+      - duplicati_encryption_key
     ports:
       - '8200:8200'
     restart: unless-stopped
+
+secrets:
+  duplicati_encryption_key:
+    file: './duplicati_encryption_key.txt'
