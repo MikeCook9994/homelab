@@ -8,7 +8,7 @@ services:
       - '9443:9443/tcp'
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
-      - '/home/mike/homelab/pve1/cleric/portainer/data:/data'
+      - './data:/data'
     secrets:
       - 'password'
     network_mode: 'bridge'

@@ -7,6 +7,6 @@ services:
     devices:
       - '/dev/ttyUSB0:/dev/ttyUSB0'
     volumes:
-      - '/home/mike/homelab/pve1/warlock/octoprint/data:/octoprint/data'
+      - './data:/octoprint/data'
     network_mode: 'bridge'
     restart: 'unless-stopped'

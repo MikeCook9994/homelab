@@ -122,6 +122,15 @@ http:
         - 'https-redirect'
       tls: {}
       service: 'nvr'
+    duplicati:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`duplicati.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: 'duplicati'
   services:
     proxmox:
       loadBalancer:
@@ -178,6 +187,10 @@ http:
         servers:
           - url: 'http://192.168.1.75'
         passHostHeader: true
+    duplicati:
+      loadBalancer:
+        servers:
+          - url: 'http://192.168.1.201:8200'
   middlewares:
     pihole-addprefix:
       addPrefix:

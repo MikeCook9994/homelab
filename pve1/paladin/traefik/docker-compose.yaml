@@ -16,9 +16,9 @@ services:
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
-      - '/home/mike/homelab/pve1/paladin/traefik/traefik.yaml:/traefik.yaml:ro'
-      - '/home/mike/homelab/pve1/paladin/traefik/config:/config:ro'
-      - '/home/mike/homelab/pve1/paladin/traefik/acme.json:/acme.json'
+      - './traefik.yaml:/traefik.yaml:ro'
+      - './config:/config:ro'
+      - './acme.json:/acme.json'
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.middlewares.traefik-auth.basicauth.users=mike:$$apr1$26u9afvb$$M.WjHBpcVYSfvBnR2cmtg.'
