@@ -29,6 +29,16 @@ services:
     network_mode: 'bridge'
     restart: 'unless-stopped'
 
+  filebrowser:
+    container_name: 'filebrowser'
+    image: 'filebrowser/filebrowser'
+    ports:
+      - '8080:80'
+    volumes:
+      - './data:/srv'
+      - './database:/database'
+      - './config:/config'
+
 secrets:
   config:
     file: 'secrets.json'
