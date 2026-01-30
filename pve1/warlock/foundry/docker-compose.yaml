@@ -37,8 +37,8 @@ services:
       - '8080:80'
     volumes:
       - './data:/srv'
-      - './database:/database'
-      - './config:/config'
+      - './filebrowser/database:/database'
+      - './filebrowser/config:/config'
     restart: 'unless-stopped'
 
 secrets:
