@@ -6,5 +6,7 @@ Before even bringing the device online, review the mac address in the VMs networ
 
 ## Regenerate SSH host keys
 
+Sign into vm via proxmox portal as root
+
 `rm -v /etc/ssh/ssh_host_*`
 `dpkg-reconfigure openssh-server`
