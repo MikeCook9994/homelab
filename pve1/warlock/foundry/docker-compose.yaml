@@ -1,7 +1,7 @@
 services:
   foundry_vtt:
     container_name: 'foundryvtt'
-    image: 'felddy/foundryvtt:14.364'
+    image: 'felddy/foundryvtt:14.363'
     ports:
       - '30000:30000/tcp'
     environment:
@@ -9,7 +9,7 @@ services:
       FOUNDRY_LOCAL_HOSTNAME: 'foundry.local.michaelcook.dev'
       FOUNDRY_MINIFY_STATIC_FILES: true
       FOUNDRY_TELEMETRY: true
-      FOUNDRY_VERSION: '14.364'
+      FOUNDRY_VERSION: '14.363'
       FOUNDRY_PROXY_SSL: true
       FOUNDRY_PROXY_PORT: 443
       CONTAINER_PATCH_URLS: 'https://gist.githubusercontent.com/felddy/a02d66c3817f8223652d96febe580153/raw/foundryvtt-module-check.sh'
