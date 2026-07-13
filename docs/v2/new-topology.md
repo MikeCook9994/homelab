@@ -35,6 +35,8 @@
 * Homepage
 * Nextcloud
 * Bitwarden
+* IT Tools
+  * [Suite of random utilities like MAC Address lookup](https://github.com/CorentinTh/it-tools)
 
 ## [VM] Rogue: Security/Surveillance
 
