@@ -1,6 +1,6 @@
 http:
   routers:
-    proxmox:
+    proxmox-old:
       entrypoints:
         - 'https'
       rule: 'Host(`proxmox-old.local.michaelcook.dev`)'
@@ -9,6 +9,15 @@ http:
         - 'https-redirect'
       tls: {}
       service: 'proxmox-old'
+    proxmox:
+      entrypoints:
+        - 'https'
+      rule: 'Host(`proxmox.local.michaelcook.dev`)'
+      middlewares:
+        - 'default-headers'
+        - 'https-redirect'
+      tls: {}
+      service: 'proxmox'
     pihole-primary:
       entrypoints:
         - 'https'
