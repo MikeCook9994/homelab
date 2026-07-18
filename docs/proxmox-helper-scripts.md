@@ -1,31 +1,33 @@
-# Proxmox Helper Scripts
+# Proxmox Community Scripts
 
-The following scripts are provided by the [Proxmox Helper Scripts](https://proxmox-helper-scripts.vercel.app/) project.
+The following scripts are provided by the [Proxmox Community Scripts](https://community-scripts.org/) project.
 
 ## Proxmox Host Scripts
 
 ### Proxmox VE Post Install
-[Link](https://tteck.github.io/Proxmox/#proxmox-ve-post-install)
+[Link](https://community-scripts.org/scripts/post-pve-install)
 
 Accept **yes** to all prompts.
 
 ### Proxmox Kernel Clean
-[Link](https://tteck.github.io/Proxmox/#proxmox-ve-kernel-clean)
+[Link](https://community-scripts.org/categories?category=proxmox-and-virtualization&preview=kernel-clean)
 
 ## LXC Management Scripts
 
-### Proxmox VE LXC Cleanup
-[Link](https://tteck.github.io/Proxmox/#proxmox-ve-lxc-updater)
+### PVE LXC Cleanup
+
+[Link](https://community-scripts.org/categories?category=proxmox-and-virtualization&preview=update-lxcs)
 
 This script should be executed from the proxmox shell, rather than over SSH.
 
 ### Proxmox VE LXC Filesystem Trim
-[Link](https://tteck.github.io/Proxmox/#proxmox-ve-lxc-filesystem-trim)
+
+[Link](https://community-scripts.org/categories?category=proxmox-and-virtualization&preview=fstrim)
 
 ## LXC Creation Scripts
 
 ### Docker LXC
-[Link](https://tteck.github.io/Proxmox/#docker-lxc)
+[Link](https://community-scripts.org/categories?category=containers-and-docker&preview=docker)
 
 This script should be executed from the proxmox shell, rather than over SSH.
 
@@ -59,4 +61,5 @@ Once completed, the following other documentation pages should be completed
 1. [Configuring Authentication](./configuring-authentication.md)
 
 ### PiHole LXC
+
 [Link](https://tteck.github.io/Proxmox/#pi-hole-lxc)

@@ -1,8 +1,6 @@
 ## Configure certificates
 
-This is not really necessary.
-
-1. Add Cloudflare account using an API token providing edit permissions for the `Zone.Zone` and `Zone.DNS` scopes. 
+1. Under Datacenter -> ACME, Add Cloudflare account (and challenge plugin) using an API token providing edit permissions for the `Zone.Zone` and `Zone.DNS` scopes. 
 2. Add acme account using DNS challenge. domain should be `pve1.local.michaelcook.dev` (or whatever the name of the proxmox host is).
 3. "Order Certificates Now"
 
@@ -14,7 +12,7 @@ Keep note of the secret key because this will be used to setup 2FA authenticatio
 
 ## Run Proxmox Post Install Script
 
-[Link](./proxmox-helper-scripts.md#proxmox-ve-post-install)
+[Link](./proxmox-community-scripts.md#proxmox-ve-post-install)
 
 ## Install Packages
 

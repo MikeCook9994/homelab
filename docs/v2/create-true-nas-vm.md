@@ -4,6 +4,5 @@ This documentation covers the start to end instructions for creating a new VM ba
 
 This VM's job is serve the NFS that is used for storing all application data. It also hosts "storage related" applications like Postgres, Garage, etc.
 
-# Download ISO
+# Use Proxmox Community Script to Create VM
 
-Available from [TrueNAS](https://www.truenas.com/download/)
